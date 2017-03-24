@@ -89,5 +89,10 @@ namespace Alnitak
                 this.ShowInTaskbar = true;
             }
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Properties.Settings.Default.Save();
+        }
     }
 }

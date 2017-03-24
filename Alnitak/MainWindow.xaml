@@ -5,13 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Alnitak"
         xmlns:tb="http://www.hardcodet.net/taskbar"
+        xmlns:Properties="clr-namespace:Alnitak.Properties"
         mc:Ignorable="d"
         StateChanged="Window_StateChanged"
+        Closing="Window_Closing"
         Title="MainWindow" Height="350" Width="525">
     <DockPanel>
         <StackPanel DockPanel.Dock="Top">
             <TextBox x:Name="textBox" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Path}" VerticalAlignment="Top"/>
-            <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding BranchFilter}" VerticalAlignment="Top"/>
+            <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Path=RemoteBranchFilter, Mode=TwoWay, Source={x:Static Properties:Settings.Default}}" VerticalAlignment="Top"/>
             <TextBox Text="{Binding RefreshEvery}" />
             <Button Content="Refresh" Command="{Binding RefreshInfoCommand}"/>
             <ItemsControl Name="repoList" ItemsSource="{Binding Repositories}">

@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Alnitak.Services;
 using LibGit2Sharp;
 using NLog;
 
@@ -12,9 +13,10 @@ namespace Alnitak.ViewModels
     public class MainWindowViewModel : BaseViewModel
     {
         Logger logger = LogManager.GetCurrentClassLogger();
+        IServiceFactory serviceFactory = ServiceFactory.DefaultServiceFactory;
+        ISettings settings;
 
         public string Path { get; set; } = "c:\\dev";
-        public string BranchFilter { get; set; }
         public int RefreshEvery { get; set; } = 15; //15 mins
 
         public PropertiesObservableCollection<RepositoryViewModel> Repositories { get; set; } = new PropertiesObservableCollection<RepositoryViewModel>();
@@ -37,6 +39,11 @@ namespace Alnitak.ViewModels
             {
                 return new RealyAsyncCommand<object>(ExecuteTbIconClickedCommand);
             }
+        }
+
+        public MainWindowViewModel()
+        {
+            settings = serviceFactory.GetService<ISettings>();
         }
 
         private Task<object> ExecuteTbIconClickedCommand(object arg)
@@ -72,7 +79,7 @@ namespace Alnitak.ViewModels
                             repositoryViewModel = new RepositoryViewModel(repo);
                             Repositories.Add(repositoryViewModel);
                         }
-                        await repositoryViewModel.Refresh(BranchFilter);
+                        await repositoryViewModel.Refresh(settings.RemoteBranchFilter);
                     }
                 }
                 catch (RepositoryNotFoundException)

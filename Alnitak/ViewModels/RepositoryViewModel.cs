@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Alnitak.Services;
 using Alnitak.Utils;
 using LibGit2Sharp;
 using NLog;
@@ -16,9 +17,13 @@ namespace Alnitak.ViewModels
         private Repository repo;
 
         Logger logger = LogManager.GetCurrentClassLogger();
+        IServiceFactory serviceFactory = ServiceFactory.DefaultServiceFactory;
+        ISettings settings;
 
         public RepositoryViewModel(Repository repo)
         {
+            settings = serviceFactory.GetService<ISettings>();
+
             this.repo = repo;
             this.Name = repo.Info.WorkingDirectory;
         }
@@ -50,7 +55,7 @@ namespace Alnitak.ViewModels
                 );
             logger.Info(remotes.Out);
             logger.Info(remotes.Error);
-            await Refresh("");//TODO: pas proper brnach filter settings
+            await Refresh(settings.RemoteBranchFilter);
             return null;
         }
 

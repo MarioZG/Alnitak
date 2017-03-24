@@ -2,6 +2,6 @@
 {
     public interface IServiceFactory
     {
-        T GetService<T>();
+        T GetService<T>() where T : class;
     }
 }
