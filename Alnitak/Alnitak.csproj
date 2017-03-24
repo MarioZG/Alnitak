@@ -71,6 +71,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Services\IServiceFactory.cs" />
+    <Compile Include="Services\ISettings.cs" />
+    <Compile Include="Services\ServiceFactory.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="Utils\CmdHelper.cs" />
     <Compile Include="Utils\CmdStreamsOutput.cs" />
     <Compile Include="Utils\MemoryTargetEventArg.cs" />
