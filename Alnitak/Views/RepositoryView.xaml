@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="Alnitak.Views.RepositoryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Alnitak.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <Style x:Key="Behid" TargetType="{x:Type TextBlock}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Behind}"  Value="0">
+                    <Setter Property="Foreground" Value="Black"/>
+                </DataTrigger>
+            </Style.Triggers>
+            <Setter Property="Foreground" Value="Red" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Padding" Value="5,0,5,0"/>
+        </Style>
+    </UserControl.Resources>
+    <StackPanel Orientation="Horizontal">
+        <TextBlock FontWeight="Bold" Text="{Binding Name}" />
+        <TextBlock Text="{Binding MasterCount}" />
+        <ItemsControl ItemsSource="{Binding Remotes}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Name}" />
+                        <!--<TextBlock Text="{Binding Ahead}" Style="{StaticResource Behid}" />-->
+                        <TextBlock Text="{Binding Behind, StringFormat={}{0} behind}" Style="{StaticResource Behid}" />
+                        <TextBlock Text="{Binding RemoteBranchesCount, StringFormat={} {0} remeote branches left}" Style="{StaticResource Behid}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <Button HorizontalAlignment="Right" Command="{Binding PullCommand}" Content="Pull"/>
+    </StackPanel>
+</UserControl>

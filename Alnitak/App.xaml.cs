@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Alnitak.Utils;
+using Microsoft.Win32;
+using NLog;
+using NLog.Targets;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +17,17 @@ namespace Alnitak
     /// </summary>
     public partial class App : Application
     {
+        Logger logger;
+
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+            Target.Register<Utils.NLogMemoryTarget>("NLogMemoryTarget");
+            logger = LogManager.GetCurrentClassLogger();
+        }
+
+        private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        {
+            throw e.Exception;
+        }
     }
 }
