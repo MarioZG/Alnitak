@@ -42,6 +42,7 @@ namespace Alnitak.ViewModels
 
         private async Task<object> ExecutePullCommand(object arg)
         {
+            logger.Info("Pulling {0}", repo.Info.WorkingDirectory);
             CmdStreamsOutput remotes = await CmdHelper.RunProcessAsync(
                 "cmd",
                 "/C git pull",
