@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Alnitak.ViewModels
+namespace Alnitak.Utils
 {
     /// <summary>
     /// from https://msdn.microsoft.com/magazine/dn605875

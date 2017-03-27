@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Alnitak.ViewModels
+namespace Alnitak.Utils
 {
     public class PropertiesObservableCollection<T> : ObservableCollection<T>
         where T : INotifyPropertyChanged

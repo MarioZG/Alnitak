@@ -81,11 +81,11 @@
     <Compile Include="Utils\NLogMemoryTarget.cs" />
     <Compile Include="Utils\PeriodicalChecker.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
-    <Compile Include="ViewModels\IAsyncCommand.cs" />
+    <Compile Include="Utils\IAsyncCommand.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
-    <Compile Include="ViewModels\NotifyTaskCompletion.cs" />
-    <Compile Include="ViewModels\PropertiesObservableCollection.cs" />
-    <Compile Include="ViewModels\RealyAsyncCommand.cs" />
+    <Compile Include="Utils\NotifyTaskCompletion.cs" />
+    <Compile Include="Utils\PropertiesObservableCollection.cs" />
+    <Compile Include="Utils\RealyAsyncCommand.cs" />
     <Compile Include="ViewModels\RemoteBranchViewModel.cs" />
     <Compile Include="ViewModels\RepositoryViewModel.cs" />
     <Compile Include="Views\RepositoryView.xaml.cs">

@@ -53,8 +53,10 @@ namespace Alnitak.ViewModels
                 "/C git pull",
                 repo.Info.WorkingDirectory
                 );
-            logger.Info(remotes.Out);
+
             logger.Info(remotes.Error);
+            logger.Info(remotes.Out);
+
             await Refresh(settings.RemoteBranchFilter);
             logger.Info("Pull finished {0}", repo.Info.WorkingDirectory);
             return null;

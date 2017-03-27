@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Alnitak.Services;
 using LibGit2Sharp;
 using NLog;
+using Alnitak.Utils;
 
 namespace Alnitak.ViewModels
 {
