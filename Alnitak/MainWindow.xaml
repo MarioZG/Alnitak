@@ -27,6 +27,7 @@
         </StackPanel>
         <tb:TaskbarIcon x:Name="tbIcon"
                         IconSource="Resources/git.ico"
+                        DoubleClickCommand="{Binding TbIconClickedCommand}" DoubleClickCommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
                         LeftClickCommand="{Binding TbIconClickedCommand}" LeftClickCommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
             ToolTipText="All ok?" />
         <ScrollViewer x:Name="svLog" HorizontalAlignment="Stretch">

@@ -51,11 +51,14 @@ namespace Alnitak.ViewModels
             switch (((MainWindow)arg).WindowState)
             {
                 case System.Windows.WindowState.Normal:
+                    ((MainWindow)arg).Activate();
                     break;
                 case System.Windows.WindowState.Minimized:
                     ((MainWindow)arg).WindowState = System.Windows.WindowState.Normal;
+                    ((MainWindow)arg).Activate();
                     break;
                 case System.Windows.WindowState.Maximized:
+                    ((MainWindow)arg).Activate();
                     break;
                 default:
                     break;
