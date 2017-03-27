@@ -27,6 +27,7 @@ namespace Alnitak
 
         private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
+            logger.Error(e.Exception, "Cought at DispatcherUnhandledException");
             throw e.Exception;
         }
     }

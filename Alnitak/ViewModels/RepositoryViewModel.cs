@@ -56,6 +56,7 @@ namespace Alnitak.ViewModels
             logger.Info(remotes.Out);
             logger.Info(remotes.Error);
             await Refresh(settings.RemoteBranchFilter);
+            logger.Info("Pull finished {0}", repo.Info.WorkingDirectory);
             return null;
         }
 
