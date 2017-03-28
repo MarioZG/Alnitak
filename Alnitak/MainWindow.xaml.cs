@@ -56,16 +56,19 @@ namespace Alnitak
 
         private void Pc_CheckFinished(object sender, EventArgs e)
         {
-            bool anyBehind = ((MainWindowViewModel)this.DataContext).Repositories.Any(r => r.Remotes.Any(r2 => r2.Behind > 0));
-            if (anyBehind)
+            this.Dispatcher.InvokeAsync(() =>
             {
-                this.tbIcon.IconSource = new BitmapImage(new Uri("pack://application:,,,/Resources/gitWarning.ico", UriKind.RelativeOrAbsolute));
-                this.tbIcon.ShowBalloonTip("Repos refreshed", "You are behind on some of repos!", Hardcodet.Wpf.TaskbarNotification.BalloonIcon.Warning);
-            }
-            else
-            {
-                this.tbIcon.IconSource = new BitmapImage(new Uri("pack://application:,,,/Resources/gitOK.ico", UriKind.RelativeOrAbsolute));
-            }
+                bool anyBehind = ((MainWindowViewModel)this.DataContext).Repositories.Any(r => r.Remotes.Any(r2 => r2.Behind > 0));
+                if (anyBehind)
+                {
+                    this.tbIcon.IconSource = new BitmapImage(new Uri("pack://application:,,,/Resources/gitWarning.ico", UriKind.RelativeOrAbsolute));
+                    this.tbIcon.ShowBalloonTip("Repos refreshed", "You are behind on some of repos!", Hardcodet.Wpf.TaskbarNotification.BalloonIcon.Warning);
+                }
+                else
+                {
+                    this.tbIcon.IconSource = new BitmapImage(new Uri("pack://application:,,,/Resources/gitOK.ico", UriKind.RelativeOrAbsolute));
+                }
+            });
         }
 
         private void Mt_LogUpdated(object sender, EventArgs e)

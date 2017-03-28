@@ -27,6 +27,30 @@ namespace Alnitak.Utils
         {
             SessionOnHold = e.Reason == SessionSwitchReason.RemoteDisconnect;
             logger.Info("Session stae changed to {0}", e.Reason);
+            switch (e.Reason)
+            {
+                case SessionSwitchReason.ConsoleConnect:
+                    break;
+                case SessionSwitchReason.ConsoleDisconnect:
+                    break;
+                case SessionSwitchReason.RemoteConnect:
+                    Task.Run(() => mwvm.ExecuteRefreshInfoCommand(null));
+                    break;
+                case SessionSwitchReason.RemoteDisconnect:
+                    break;
+                case SessionSwitchReason.SessionLogon:
+                    break;
+                case SessionSwitchReason.SessionLogoff:
+                    break;
+                case SessionSwitchReason.SessionLock:
+                    break;
+                case SessionSwitchReason.SessionUnlock:
+                    break;
+                case SessionSwitchReason.SessionRemoteControl:
+                    break;
+                default:
+                    break;
+            }
         }
 
         public async Task Worker()
@@ -38,7 +62,6 @@ namespace Alnitak.Utils
                     await mwvm.ExecuteRefreshInfoCommand(null);
                 }
                 await Task.Delay(new TimeSpan(0, mwvm.RefreshEvery, 0));
-
             }
         }
     }

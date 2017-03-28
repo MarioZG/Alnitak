@@ -15,7 +15,9 @@ namespace Alnitak.ViewModels
         protected void RaisePropertyChangedEvent([CallerMemberName] string propertyName = null)
         {
             var handler = PropertyChanged;
-            handler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            App.Current.Dispatcher.Invoke(() =>
+                handler?.Invoke(this, new PropertyChangedEventArgs(propertyName))
+            );
         }
 
         protected void ClearPropertyChanged()
