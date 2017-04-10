@@ -34,5 +34,6 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
         <Button HorizontalAlignment="Right" Command="{Binding PullCommand}" Content="Pull"/>
+        <Button HorizontalAlignment="Right" Command="{Binding StartShCommand}" Content="Bash"/>
     </StackPanel>
 </UserControl>

@@ -45,6 +45,40 @@ namespace Alnitak.ViewModels
             }
         }
 
+        public IAsyncCommand StartShCommand
+        {
+            get
+            {
+                return new RealyAsyncCommand<object>(ExecuteStartShCommand, CanExecuteStartShCommand);
+            }
+        }
+
+        private bool CanExecuteStartShCommand(object arg)
+        {
+            return true;
+        }
+
+        private Task<object> ExecuteStartShCommand(object arg)
+        {
+            Process process = new Process();
+            process.EnableRaisingEvents = true;
+            process.StartInfo = new ProcessStartInfo()
+            {
+                WorkingDirectory = repo.Info.WorkingDirectory,
+                FileName = "C:\\Program Files\\Git\\bin\\sh.exe",
+                //WindowStyle = ProcessWindowStyle.Hidden,
+                //UseShellExecute = false,
+                //RedirectStandardOutput = true,
+                //RedirectStandardError = true,
+                //RedirectStandardInput = true,
+                //CreateNoWindow = true
+            };
+
+            process.Start();
+
+            return null;
+        }
+
         private async Task<object> ExecutePullCommand(object arg)
         {
             try
