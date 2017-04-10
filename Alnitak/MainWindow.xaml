@@ -12,9 +12,23 @@
         Title="MainWindow" Height="350" Width="525">
     <DockPanel>
         <StackPanel DockPanel.Dock="Top">
-            <TextBox x:Name="textBox" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Path}" VerticalAlignment="Top"/>
-            <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Path=RemoteBranchFilter, Mode=TwoWay, Source={x:Static Properties:Settings.Default}}" VerticalAlignment="Top"/>
-            <TextBox Text="{Binding RefreshEvery}" />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25*"/>
+                    <RowDefinition Height="25*"/>
+                    <RowDefinition Height="25*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30*"/>
+                    <ColumnDefinition Width="70*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="local folder"/>
+                <TextBox x:Name="textBox" TextWrapping="Wrap" Text="{Binding Path}" Grid.Column="1"/>
+                <Label Content="remote branch filter" Grid.Row="1"/>
+                <TextBox TextWrapping="Wrap" Text="{Binding Path=RemoteBranchFilter, Mode=TwoWay, Source={x:Static Properties:Settings.Default}}" Grid.Row="1" Grid.Column="1"/>
+                <Label Content="refresy evey X minutes" Grid.Row="2"/>
+                <TextBox Text="{Binding RefreshEvery}" Grid.Row="2" Grid.Column="1"/>
+            </Grid>
             <Button Content="Refresh" Command="{Binding RefreshInfoCommand}"/>
             <ItemsControl Name="repoList" ItemsSource="{Binding Repositories}">
                 <ItemsControl.ItemTemplate>
