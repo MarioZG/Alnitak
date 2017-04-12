@@ -26,7 +26,7 @@
                 <TextBox x:Name="textBox" TextWrapping="Wrap" Text="{Binding Path}" Grid.Column="1"/>
                 <Label Content="remote branch filter" Grid.Row="1"/>
                 <TextBox TextWrapping="Wrap" Text="{Binding Path=RemoteBranchFilter, Mode=TwoWay, Source={x:Static Properties:Settings.Default}}" Grid.Row="1" Grid.Column="1"/>
-                <Label Content="refresy evey X minutes" Grid.Row="2"/>
+                <Label Content="refresh evey X minutes" Grid.Row="2"/>
                 <TextBox Text="{Binding RefreshEvery}" Grid.Row="2" Grid.Column="1"/>
             </Grid>
             <Button Content="Refresh" Command="{Binding RefreshInfoCommand}"/>
