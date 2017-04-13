@@ -17,9 +17,22 @@
             <Setter Property="FontSize" Value="14" />
             <Setter Property="Padding" Value="5,0,5,0"/>
         </Style>
+        <Style x:Key="Branches" TargetType="{x:Type TextBlock}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding RemoteBranchesCount}"  Value="0">
+                    <Setter Property="Foreground" Value="Black"/>
+                </DataTrigger>
+            </Style.Triggers>
+            <Setter Property="Foreground" Value="Red" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Padding" Value="5,0,5,0"/>
+        </Style>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="Margin" Value="5,0,5,0"/>
+        </Style>
     </UserControl.Resources>
     <StackPanel Orientation="Horizontal">
-        <TextBlock FontWeight="Bold" Text="{Binding Name}" />
+        <TextBlock FontWeight="Bold" Text="{Binding FolderName}" />
         <TextBlock Text="{Binding MasterCount}" />
         <ItemsControl ItemsSource="{Binding Remotes}">
             <ItemsControl.ItemTemplate>
@@ -28,7 +41,7 @@
                         <TextBlock Text="{Binding Name}" />
                         <!--<TextBlock Text="{Binding Ahead}" Style="{StaticResource Behid}" />-->
                         <TextBlock Text="{Binding Behind, StringFormat={}{0} behind}" Style="{StaticResource Behid}" />
-                        <TextBlock Text="{Binding RemoteBranchesCount, StringFormat={} {0} remeote branches left}" Style="{StaticResource Behid}"/>
+                        <TextBlock Text="{Binding RemoteBranchesCount, StringFormat={} {0} remeote branches left}" Style="{StaticResource Branches}"/>
                     </StackPanel>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>

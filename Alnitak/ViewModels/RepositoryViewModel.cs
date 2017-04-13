@@ -34,6 +34,11 @@ namespace Alnitak.ViewModels
             set { SetProperty(ref name, value); }
         }
 
+        public string FolderName
+        {
+            get { return System.IO.Path.GetFileName(name.TrimEnd(new char[] { '\\' })); }
+        }
+
         public string MasterCount { get; set; }
         public PropertiesObservableCollection<RemoteBranchViewModel> Remotes { get; set; } = new PropertiesObservableCollection<RemoteBranchViewModel>();
 
