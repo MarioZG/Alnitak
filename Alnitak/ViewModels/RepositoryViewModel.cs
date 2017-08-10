@@ -130,7 +130,7 @@ namespace Alnitak.ViewModels
 
         private Task<object> ExecuteStartCreateBranchFromMainCommand(object arg)
         {
-            this.NewBranchName = "muse/mk/";
+            this.NewBranchName = "/mk/";
             this.NewBranchNameVisible = System.Windows.Visibility.Visible;
             RaisePropertyChangedEvent(nameof(NewBranchName));
             RaisePropertyChangedEvent(nameof(NewBranchNameVisible));
@@ -151,7 +151,7 @@ namespace Alnitak.ViewModels
         {
             CmdStreamsOutput remotes = await CmdHelper.RunProcessAsync(
                 "cmd",
-                $"/C git checkout --no-track origin/master -b '{NewBranchName}'",
+                $"/C git checkout --no-track origin/master -b \"{NewBranchName}\"",
                 repo.Info.WorkingDirectory
                 );
 
