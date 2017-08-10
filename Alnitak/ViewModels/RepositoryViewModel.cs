@@ -42,6 +42,9 @@ namespace Alnitak.ViewModels
         public string MasterCount { get; set; }
         public PropertiesObservableCollection<RemoteBranchViewModel> Remotes { get; set; } = new PropertiesObservableCollection<RemoteBranchViewModel>();
 
+        public string NewBranchName { get; set; }
+        public System.Windows.Visibility NewBranchNameVisible { get; set; } = System.Windows.Visibility.Collapsed;
+
         public IAsyncCommand PullCommand
         {
             get
@@ -55,6 +58,22 @@ namespace Alnitak.ViewModels
             get
             {
                 return new RealyAsyncCommand<object>(ExecuteStartShCommand, CanExecuteStartShCommand);
+            }
+        }
+
+        public IAsyncCommand StartCreateBranchFromMain
+        {
+            get
+            {
+                return new RealyAsyncCommand<object>(ExecuteStartCreateBranchFromMainCommand, CanStartExecuteCreateBranchFromMainCommand);
+            }
+        }
+
+        public IAsyncCommand CreateBranchFromMain
+        {
+            get
+            {
+                return new RealyAsyncCommand<object>(ExecuteCreateBranchFromMainCommand, CanExecuteCreateBranchFromMainCommand);
             }
         }
 
@@ -109,9 +128,51 @@ namespace Alnitak.ViewModels
             }
         }
 
+        private Task<object> ExecuteStartCreateBranchFromMainCommand(object arg)
+        {
+            this.NewBranchName = "muse/mk/";
+            this.NewBranchNameVisible = System.Windows.Visibility.Visible;
+            RaisePropertyChangedEvent(nameof(NewBranchName));
+            RaisePropertyChangedEvent(nameof(NewBranchNameVisible));
+            return null;
+        }
+
+        private bool CanStartExecuteCreateBranchFromMainCommand(object arg)
+        {
+            return IsMaster();
+        }
+
+        private bool CanExecuteCreateBranchFromMainCommand(object arg)
+        {
+            return IsMaster();
+        }
+
+        private async Task<object> ExecuteCreateBranchFromMainCommand(object arg)
+        {
+            CmdStreamsOutput remotes = await CmdHelper.RunProcessAsync(
+                "cmd",
+                $"/C git checkout --no-track origin/master -b '{NewBranchName}'",
+                repo.Info.WorkingDirectory
+                );
+
+            logger.Info(remotes.Error);
+            logger.Info(remotes.Out);
+
+            this.NewBranchNameVisible = System.Windows.Visibility.Collapsed;
+            RaisePropertyChangedEvent(nameof(NewBranchNameVisible));
+            return null;
+        }
+
+
+
         private bool CanExecutePullCommand(object arg)
         {
-            return repo?.Head?.FriendlyName == "master";    
+            return IsMaster();
+        }
+
+        private bool IsMaster()
+        {
+            return repo?.Head?.FriendlyName == "master";
         }
 
         internal async Task Refresh(string branchFilter)

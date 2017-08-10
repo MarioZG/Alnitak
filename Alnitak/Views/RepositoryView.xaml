@@ -45,8 +45,11 @@
                     </StackPanel>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
-        </ItemsControl>
+        </ItemsControl>        
         <Button HorizontalAlignment="Right" Command="{Binding PullCommand}" Content="Pull"/>
         <Button HorizontalAlignment="Right" Command="{Binding StartShCommand}" Content="Bash"/>
+        <Button HorizontalAlignment="Right" Command="{Binding StartCreateBranchFromMain}" Content="CreateLocalBranch"/>
+        <TextBox Text="{Binding NewBranchName}" MinWidth="100"  Visibility="{Binding NewBranchNameVisible}" />
+        <Button HorizontalAlignment="Right" Command="{Binding CreateBranchFromMain}" Content="Create !" Visibility="{Binding NewBranchNameVisible}"/>
     </StackPanel>
 </UserControl>
