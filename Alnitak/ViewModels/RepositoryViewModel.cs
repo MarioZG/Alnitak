@@ -134,10 +134,9 @@ namespace Alnitak.ViewModels
                     IEnumerable<string> refSpecs = remote.FetchRefSpecs.Select(x => x.Specification);
                     CmdStreamsOutput output = await CmdHelper.RunProcessAsync(
                         "cmd",
-                        "/C git fetch",
+                        "/C git fetch --prune",
                         repo.Info.WorkingDirectory
                         );
-                    //await Task.Run(() => Commands.Fetch(repo, remote.Name, refSpecs, null, logMessage));
                     fetchedOk = true;
 
                     output = await CmdHelper.RunProcessAsync(
