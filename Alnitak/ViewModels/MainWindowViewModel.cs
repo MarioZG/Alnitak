@@ -83,7 +83,7 @@ namespace Alnitak.ViewModels
                             repositoryViewModel = new RepositoryViewModel(repo);
                             Repositories.Add(repositoryViewModel);
                         }
-                        await repositoryViewModel.Refresh(settings.RemoteBranchFilter);
+                        await repositoryViewModel.Refresh(settings.RemoteBranchFilter, true);
                     }
                 }
                 catch (RepositoryNotFoundException)

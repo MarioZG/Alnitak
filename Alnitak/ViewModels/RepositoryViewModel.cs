@@ -117,7 +117,8 @@ namespace Alnitak.ViewModels
                 logger.Info(remotes.Error);
                 logger.Info(remotes.Out);
 
-                await Refresh(settings.RemoteBranchFilter);
+                await Refresh(settings.RemoteBranchFilter, arg == null ? false: (bool)arg);
+
                 logger.Info("Pull finished {0}", repo.Info.WorkingDirectory);
                 return null;
             }
@@ -175,7 +176,7 @@ namespace Alnitak.ViewModels
             return repo?.Head?.FriendlyName == "master";
         }
 
-        internal async Task Refresh(string branchFilter)
+        internal async Task Refresh(string branchFilter, bool executePullOnmastersbehind)
         {
             repo = new Repository(name); //refrsesh repo, otherwise memory exceptions are thrown
             //RepositoryStatus status;
@@ -222,6 +223,12 @@ namespace Alnitak.ViewModels
                     rbvm.Behind = Int32.Parse(infoSplit[1]);
                     rbvm.Info = output.Out + output.Error;
                     rbvm.RemoteBranchesCount = GetRemoteBranchesCount(remote, branchFilter);
+
+
+                    if (IsMaster() && rbvm.Behind > 0 && executePullOnmastersbehind)
+                    {
+                        await ExecutePullCommand(false);
+                    }
                 }
                 catch (LibGit2Sharp.LibGit2SharpException ex)
                 {
