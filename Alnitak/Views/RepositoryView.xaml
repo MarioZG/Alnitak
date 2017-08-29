@@ -31,25 +31,30 @@
             <Setter Property="Margin" Value="5,0,5,0"/>
         </Style>
     </UserControl.Resources>
+  <StackPanel Orientation="Vertical">
     <StackPanel Orientation="Horizontal">
-        <TextBlock FontWeight="Bold" Text="{Binding FolderName}" />
-        <TextBlock Text="{Binding MasterCount}" />
-        <ItemsControl ItemsSource="{Binding Remotes}">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Name}" />
-                        <!--<TextBlock Text="{Binding Ahead}" Style="{StaticResource Behid}" />-->
-                        <TextBlock Text="{Binding Behind, StringFormat={}{0} behind}" Style="{StaticResource Behid}" />
-                        <TextBlock Text="{Binding RemoteBranchesCount, StringFormat={} {0} remeote branches left}" Style="{StaticResource Branches}"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>        
-        <Button HorizontalAlignment="Right" Command="{Binding PullCommand}" Content="Pull"/>
-        <Button HorizontalAlignment="Right" Command="{Binding StartShCommand}" Content="Bash"/>
-        <Button HorizontalAlignment="Right" Command="{Binding StartCreateBranchFromMain}" Content="CreateLocalBranch"/>
-        <TextBox Text="{Binding NewBranchName}" MinWidth="100"  Visibility="{Binding NewBranchNameVisible}" />
-        <Button HorizontalAlignment="Right" Command="{Binding CreateBranchFromMain}" Content="Create !" Visibility="{Binding NewBranchNameVisible}"/>
+      <TextBlock FontWeight="Bold" Text="{Binding FolderName}" />
+      <TextBlock Text="{Binding MasterCount}" />
+      <ItemsControl ItemsSource="{Binding Remotes}">
+        <ItemsControl.ItemTemplate>
+          <DataTemplate>
+            <StackPanel Orientation="Horizontal">
+              <TextBlock Text="{Binding Name}" />
+              <!--<TextBlock Text="{Binding Ahead}" Style="{StaticResource Behid}" />-->
+              <TextBlock Text="{Binding Behind, StringFormat={}{0} behind}" Style="{StaticResource Behid}" />
+              <TextBlock Text="{Binding RemoteBranchesCount, StringFormat={} {0} remeote branches left}" Style="{StaticResource Branches}"/>
+            </StackPanel>
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+      <Button HorizontalAlignment="Right" Command="{Binding PullCommand}" Content="Pull"/>
+      <Button HorizontalAlignment="Right" Command="{Binding StartShCommand}" Content="Bash"/>
+      <Button HorizontalAlignment="Right" Command="{Binding StartCreateBranchFromMain}" Content="CreateLocalBranch"/>
+      <Button HorizontalAlignment="Right" Command="{Binding CheckoutMasterCommand}" Content="Checkout master"/>
     </StackPanel>
+    <StackPanel HorizontalAlignment="Right">
+      <TextBox Text="{Binding NewBranchName}" MinWidth="100"  Visibility="{Binding NewBranchNameVisible}" />
+      <Button HorizontalAlignment="Right" Command="{Binding CreateBranchFromMain}" Content="Create !" Visibility="{Binding NewBranchNameVisible}"/>
+    </StackPanel>
+  </StackPanel>
 </UserControl>

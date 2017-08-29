@@ -81,6 +81,13 @@ namespace Alnitak.ViewModels
         {
             return true;
         }
+        public IAsyncCommand CheckoutMasterCommand
+        {
+            get
+            {
+                return new RealyAsyncCommand<object>(ExecuteCheckoutMasterCommand, CanExecuteCheckoutMasterCommand);
+            }
+        }
 
         private Task<object> ExecuteStartShCommand(object arg)
         {
@@ -170,6 +177,27 @@ namespace Alnitak.ViewModels
         {
             return IsMaster();
         }
+
+        private bool CanExecuteCheckoutMasterCommand(object arg)
+        {
+            return ! IsMaster();
+        }
+
+        private async Task<object> ExecuteCheckoutMasterCommand(object arg)
+        {
+           var remotes =  await CmdHelper.RunProcessAsync(
+                    "cmd",
+                    "/C git checkout master",
+                    repo.Info.WorkingDirectory
+                    );
+
+
+            logger.Info(remotes.Error);
+            logger.Info(remotes.Out);
+
+            return remotes;
+        }
+
 
         private bool IsMaster()
         {
